@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoApp.MainPage"
+             BackgroundColor="White"
+             xmlns:local="clr-namespace:TodoApp.ViewModel"
+             x:DataType="local:MainViewModel"
+             >
+
+    <Grid RowDefinitions="100, Auto, *"
+            ColumnDefinitions=".75*, .25*"
+            Padding="10"
+            RowSpacing="10"
+            ColumnSpacing="10">
+
+        <!-- Ensure Image has no direct content and is a self-closing element -->
+        <Image Grid.Row="0"
+               Grid.ColumnSpan="2"
+               Source="punch.jpg"
+               BackgroundColor="Transparent" />
+
+        <Entry Placeholder="Enter Task"
+               Text="{Binding Text}"
+               TextColor="Black"
+               Grid.Row="1" />
+
+        <Button Text="Add"
+                Grid.Row="1"
+                Grid.Column="1" />
+
+        <CollectionView Grid.Row="2" Grid.ColumnSpan="2">
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Apples</x:String>
+                    <x:String>Bananas</x:String>
+                    <x:String>Oranges</x:String>
+                </x:Array>
+            </CollectionView.ItemsSource>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                           BackgroundColor="Red" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Grid Padding="0,5">
+                            <Frame>
+                                <Label Text="{Binding .}"
+                                       FontSize="24"
+                                       Padding="20"
+                                       TextColor="Black" />
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
